@@ -26,6 +26,9 @@ declare global {
   interface HTMLAttributes {}
 }
 
+import {
+  Resource,
+} from './models/Resource';
 
 declare global {
 
@@ -99,9 +102,9 @@ declare global {
 
   namespace StencilComponents {
     interface RockShard {
-      'img': string;
       'initLeft': number;
       'initTop': number;
+      'resource': any | Resource;
     }
   }
 
@@ -124,9 +127,9 @@ declare global {
   }
   namespace JSXElements {
     export interface RockShardAttributes extends HTMLAttributes {
-      'img'?: string;
       'initLeft'?: number;
       'initTop'?: number;
+      'resource'?: any | Resource;
     }
   }
 }
