@@ -1,7 +1,8 @@
-import { Component, State } from "@stencil/core";
+import { Component, State, Method, Element } from "@stencil/core";
 import { store } from "../../store/store";
 import { rocks } from "../../assets/rocks";
 import { Resource } from "./../../models/Resource";
+import { coordinates } from "./../../interfaces/coordinates";
 
 @Component({
   tag: "app-root",
@@ -9,15 +10,31 @@ import { Resource } from "./../../models/Resource";
 })
 export class AppRoot {
   @State() resources = [];
-  public rockShardResource: Resource;
+  @State() resourceShards: JSX.Element[] = [];
+  @Element() ele: HTMLElement;
   public player: any;
 
   componentWillLoad() {
-    this.rockShardResource = new Resource(rocks[0]);
     store.subscribe(() => {
       const state = store.getState();
       this.resources = [...state.PlayerReducer.resources];
     });
+  }
+
+  @Method()
+  disperseResources(resource: Resource, origin: coordinates) {
+    const numberOfShards = 100;
+    let shards = [];
+    for (let i = 0; i < numberOfShards; i++) {
+      shards.push(
+        <resource-shard
+          resource={resource}
+          initTop={origin.x}
+          initLeft={origin.y}
+        />
+      );
+    }
+    this.resourceShards = [...this.resourceShards, ...shards];
   }
 
   render() {
@@ -30,19 +47,9 @@ export class AppRoot {
             </li>
           ))}
         </ul>
-        <rock-shard
-          resource={this.rockShardResource}
-          initTop={250}
-          initLeft={250}
-        />
-        <rock-shard
-          resource={this.rockShardResource}
-          initTop={250}
-          initLeft={250}
-        />
-        {rocks.map(rock => (
-          <minner-rock img={rock.image} max-strikes={rock.maxStrikes} />
-        ))}
+        <resource-node resource={new Resource(rocks[0])} />
+        <resource-node resource={new Resource(rocks[1])} />
+        {this.resourceShards}
       </main>
     );
   }

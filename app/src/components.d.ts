@@ -29,12 +29,15 @@ declare global {
 import {
   Resource,
 } from './models/Resource';
+import {
+  coordinates,
+} from './interfaces/coordinates';
 
 declare global {
 
   namespace StencilComponents {
     interface AppRoot {
-
+      'disperseResources': (resource: Resource, origin: coordinates) => void;
     }
   }
 
@@ -66,33 +69,31 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface MinnerRock {
-      'img': string;
-      'maxStrikes': number;
+    interface ResourceNode {
+      'resource': any | Resource;
     }
   }
 
-  interface HTMLMinnerRockElement extends StencilComponents.MinnerRock, HTMLStencilElement {}
+  interface HTMLResourceNodeElement extends StencilComponents.ResourceNode, HTMLStencilElement {}
 
-  var HTMLMinnerRockElement: {
-    prototype: HTMLMinnerRockElement;
-    new (): HTMLMinnerRockElement;
+  var HTMLResourceNodeElement: {
+    prototype: HTMLResourceNodeElement;
+    new (): HTMLResourceNodeElement;
   };
   interface HTMLElementTagNameMap {
-    'minner-rock': HTMLMinnerRockElement;
+    'resource-node': HTMLResourceNodeElement;
   }
   interface ElementTagNameMap {
-    'minner-rock': HTMLMinnerRockElement;
+    'resource-node': HTMLResourceNodeElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      'minner-rock': JSXElements.MinnerRockAttributes;
+      'resource-node': JSXElements.ResourceNodeAttributes;
     }
   }
   namespace JSXElements {
-    export interface MinnerRockAttributes extends HTMLAttributes {
-      'img'?: string;
-      'maxStrikes'?: number;
+    export interface ResourceNodeAttributes extends HTMLAttributes {
+      'resource'?: any | Resource;
     }
   }
 }
@@ -101,32 +102,32 @@ declare global {
 declare global {
 
   namespace StencilComponents {
-    interface RockShard {
+    interface ResourceShard {
       'initLeft': number;
       'initTop': number;
       'resource': any | Resource;
     }
   }
 
-  interface HTMLRockShardElement extends StencilComponents.RockShard, HTMLStencilElement {}
+  interface HTMLResourceShardElement extends StencilComponents.ResourceShard, HTMLStencilElement {}
 
-  var HTMLRockShardElement: {
-    prototype: HTMLRockShardElement;
-    new (): HTMLRockShardElement;
+  var HTMLResourceShardElement: {
+    prototype: HTMLResourceShardElement;
+    new (): HTMLResourceShardElement;
   };
   interface HTMLElementTagNameMap {
-    'rock-shard': HTMLRockShardElement;
+    'resource-shard': HTMLResourceShardElement;
   }
   interface ElementTagNameMap {
-    'rock-shard': HTMLRockShardElement;
+    'resource-shard': HTMLResourceShardElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      'rock-shard': JSXElements.RockShardAttributes;
+      'resource-shard': JSXElements.ResourceShardAttributes;
     }
   }
   namespace JSXElements {
-    export interface RockShardAttributes extends HTMLAttributes {
+    export interface ResourceShardAttributes extends HTMLAttributes {
       'initLeft'?: number;
       'initTop'?: number;
       'resource'?: any | Resource;
