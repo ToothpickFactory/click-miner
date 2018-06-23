@@ -38,7 +38,8 @@ export class AppRoot {
   }
 
   render() {
-    return (
+    return [
+      <ar-view />,
       <main>
         <ul>
           {this.resources.map(resource => (
@@ -51,6 +52,6 @@ export class AppRoot {
         <resource-node resource={new Resource(rocks[1])} />
         {this.resourceShards}
       </main>
-    );
+    ];
   }
 }

@@ -69,6 +69,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface ArView {
+
+    }
+  }
+
+  interface HTMLArViewElement extends StencilComponents.ArView, HTMLStencilElement {}
+
+  var HTMLArViewElement: {
+    prototype: HTMLArViewElement;
+    new (): HTMLArViewElement;
+  };
+  interface HTMLElementTagNameMap {
+    'ar-view': HTMLArViewElement;
+  }
+  interface ElementTagNameMap {
+    'ar-view': HTMLArViewElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'ar-view': JSXElements.ArViewAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface ArViewAttributes extends HTMLAttributes {
+
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface ResourceNode {
       'resource': any | Resource;
     }
