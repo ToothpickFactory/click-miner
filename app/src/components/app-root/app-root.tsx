@@ -13,8 +13,26 @@ export class AppRoot {
   @State() resourceShards: JSX.Element[] = [];
   @Element() ele: HTMLElement;
   public player: any;
+  private node: HTMLElement;
+
+  public moveView(event) {
+    const x = (window.innerHeight / 360) * event.alpha * -1;
+    const y = (window.innerHeight / 180) * event.beta * -1;
+    this.node.style.top = `${y}px`;
+    this.node.style.left = `${x}px`;
+  }
+
+  componentDidLoad() {
+    this.node = this.ele.querySelector("main");
+  }
 
   componentWillLoad() {
+    window.addEventListener(
+      "deviceorientation",
+      event => this.moveView(event),
+      true
+    );
+
     store.subscribe(() => {
       const state = store.getState();
       this.resources = [...state.PlayerReducer.resources];
@@ -49,7 +67,6 @@ export class AppRoot {
           ))}
         </ul>
         <resource-node resource={new Resource(rocks[0])} />
-        <resource-node resource={new Resource(rocks[1])} />
         {this.resourceShards}
       </main>
     ];
